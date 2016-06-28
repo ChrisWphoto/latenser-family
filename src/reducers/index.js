@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import CalendarReducer from './calendar_reducer.js';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  calendar: CalendarReducer
 });
 
 export default rootReducer;
