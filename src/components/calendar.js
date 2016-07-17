@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 //actions
 import { toggleAddStay } from '../actions/index';
 import { toggleAlert } from '../actions/index';
+import { toggleEvtDetail } from '../actions/index';
 
 
 class Calendar extends Component {
@@ -39,10 +40,10 @@ class Calendar extends Component {
     if (this.props.addStayOpen && !nextProps.addStayOpen && 
         this.state.domElementsClicked.length) {
       this.removeHighlights();
+      
+    } 
       $('.jquery-calendar').fullCalendar( 'removeEvents' )
       $('.jquery-calendar').fullCalendar( 'addEventSource', nextProps.events )
-    } 
-      
   }
 
   render() {
@@ -54,6 +55,18 @@ class Calendar extends Component {
 };
 
 function setupCalendar(calendar, events, that) {
+  //link to Calendar componet state
+  let state = that.state;
+  let props = that.props;
+
+  function getWindowHeight() {
+    let h = $(window).height();
+    console.log(h);
+    if (h > 750)
+      return h - 264;
+    return h - 60;  
+  }
+
 
   //check dates are not in past
   function validDates(dateArr){
@@ -65,27 +78,27 @@ function setupCalendar(calendar, events, that) {
         return false;
       }   
     }
-    return true
-    
+    return true;
   }
-  
   
   calendar.fullCalendar({
     editable: true,
     events: events,
     firstDay: 1,
     droppable: true,
+    contentHeight: getWindowHeight(),
 
     eventClick: function(calEvent, jsEvent, view) {
-        console.log('Event: ', calEvent);
-        console.log('View: ' + view.name);
+        // console.log(state)
+        // console.log('Event: ', calEvent);
+        // console.log('View: ' + view.name);
         $(this).css('border-color', 'red');
+        props.toggleEvtDetail(calEvent);
     },
     
     dayClick: function(date, jsEvent, view) {
-      let state = that.state;
-      console.log(date);
-      console.log(date.format());
+      // console.log(date);
+      // console.log(date.format());
       $(this).css('background-color', 'lightblue');
       state.datesClicked.push(date) 
       state.domElementsClicked.push(this) 
@@ -103,8 +116,7 @@ function setupCalendar(calendar, events, that) {
 }
 
 function mapStateToProps(state){
-  
   return { addStayOpen: state.calendar.addStayOpen };
 }
 
-export default connect(mapStateToProps, { toggleAddStay, toggleAlert })(Calendar);
+export default connect(mapStateToProps, { toggleAddStay, toggleAlert, toggleEvtDetail })(Calendar);

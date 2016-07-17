@@ -4,21 +4,21 @@ const INIT_STATE = {
   events:[],
   datesClicked: [],
   addStayOpen: false,
-  openAlert: false
+  openAlert: false,
+  currentEvent: {},
+  openEvtDetail: false
 
 };
 
 export default function(state = INIT_STATE, action){
-  
+  let newState;
   switch (action.type) {
 
     case actions.ADD_STAY_TO_CAL:
-      var x = {
+      return  {
         ...state,
         events: [...state.events, action.payload]
       };
-      // console.log('add stay state',x); 
-      return x;
 
     case actions.TOGGLE_ADD_STAY:
       let xx = {
@@ -34,6 +34,22 @@ export default function(state = INIT_STATE, action){
           ...state,
           openAlert: !state.openAlert
         }
+
+      case actions.TOGGLE_EVT_DETAIL:
+        return {
+          ...state,
+          currentEvent: action.payload || {},
+          openEvtDetail: !state.openEvtDetail
+        }
+      
+      case actions.DELETE_EVT:
+        
+        newState = { ...state };
+        newState.events = newState.events.filter( (evt) => {
+            return action.payload.id !== evt.id
+        });
+        return newState;
+         
 
   }
   return state;

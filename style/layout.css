@@ -1,0 +1,50 @@
+.grid {
+  display: table;
+  margin: 0 auto;
+}
+
+.cell {
+  display: table-cell;
+  padding: 2em; 
+}
+
+.cell h3 {
+  font-size: 32px;
+}
+
+@media screen and (max-width: 750px) {
+  .grid {
+    display: block;
+  }
+  .cell {
+    display: block
+  }
+}
+
+.wrapper-login {
+  background-image: url(/src/assets/lakesky.jpg);
+  background-size: cover;
+  background-color: #000; 
+  width: 100%;
+  height: 100vh;
+}
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif
+}
+
+.login-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.login-paper {
+  position: relative;
+  width: 100%;
+  height: 100%
+}
+
+.jquery-calendar {
+  margin: 100px; 
+}

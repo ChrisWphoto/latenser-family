@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "babel-preset-stage-1": "^6.1.18",
+    "firebase": "^3.1.0",
     "fullcalendar": "^2.2.7",
     "jquery": "^2.2.1",
     "jquery-ui": "^1.10.5",
@@ -38,6 +39,7 @@
     "react-redux": "^4.0.0",
     "react-router": "^2.0.1",
     "react-tap-event-plugin": "^1.0.0",
-    "redux": "^3.0.4"
+    "redux": "^3.0.4",
+    "redux-thunk": "^2.1.0"
   }
 }
